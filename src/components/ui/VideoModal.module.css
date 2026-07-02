@@ -1,0 +1,123 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(10, 11, 13, 0.88);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dialog {
+  position: relative;
+  width: min(1080px, 100%);
+  animation: popIn 0.3s ease;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.close {
+  position: absolute;
+  top: -52px;
+  right: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  font-size: 18px;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.close:hover {
+  background: var(--red);
+  border-color: var(--red);
+}
+
+.frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.frame iframe,
+.frame video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  text-align: center;
+  padding: 32px;
+  color: #cfd1d4;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.placeholder p {
+  max-width: 480px;
+}
+
+.placeholder code {
+  color: var(--red-light);
+  font-size: 0.85em;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--red-light);
+  background: rgba(226, 6, 19, 0.18);
+  padding: 8px 14px;
+  border-radius: 99px;
+}
+
+@media (max-width: 640px) {
+  .overlay {
+    padding: 16px;
+  }
+  .close {
+    top: -50px;
+  }
+}

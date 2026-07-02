@@ -1,0 +1,372 @@
+/* ============================================================
+   FOOTER — PREMIUM DARK (port: 01_TASARIM/footer.html)
+   ============================================================ */
+
+.ftA {
+  position: relative;
+  background: var(--ink-blue);
+  color: #cfd1d4;
+  padding: 80px 0 0;
+  overflow: hidden;
+}
+
+.ftA::before {
+  content: "";
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 36px;
+  height: 36px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  border-left: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.ftA::after {
+  content: "";
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  width: 36px;
+  height: 36px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.15);
+  border-right: 1px dashed rgba(255, 255, 255, 0.15);
+}
+
+.wrap {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1.1fr;
+  gap: 60px;
+  align-items: start;
+  padding-bottom: 60px;
+}
+
+/* Sol: iletişim */
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  font-size: 14.5px;
+  color: #dde0e3;
+  font-weight: 600;
+}
+
+.row .ic {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.row .ic.wa {
+  background: var(--whatsapp);
+  border-color: var(--whatsapp);
+}
+
+.row .ic svg {
+  width: 15px;
+  height: 15px;
+}
+
+.row .v {
+  padding-top: 7px;
+  line-height: 1.5;
+}
+
+.row .v small {
+  display: block;
+  color: #7d8893;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+/* Orta: marka */
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 8px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.logo .lg {
+  font-weight: 800;
+  font-size: 42px;
+  letter-spacing: -0.03em;
+  color: #fff;
+  line-height: 1;
+}
+
+.logo .lg span {
+  color: var(--red);
+}
+
+.logo .mk {
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  background: var(--red);
+  border-radius: 10px;
+}
+
+.logo .mk svg {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+}
+
+.tag {
+  margin-top: 14px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #7d8893;
+  text-align: center;
+}
+
+.socials {
+  margin-top: 28px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.socials a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: grid;
+  place-items: center;
+  color: #cfd1d4;
+  transition: all 0.2s ease;
+}
+
+.socials a:hover {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.socials a svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* Sağ: menü */
+.menu {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+  text-align: right;
+}
+
+.menu .label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #7d8893;
+  margin-bottom: 6px;
+}
+
+.menu a {
+  font-size: 18px;
+  font-weight: 600;
+  color: #dde0e3;
+  letter-spacing: -0.01em;
+  transition: color 0.2s, padding 0.25s;
+  position: relative;
+  display: inline-block;
+  padding-right: 0;
+  justify-self: end;
+}
+
+.menu a:hover {
+  color: #fff;
+  padding-right: 14px;
+}
+
+.menu a::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 1px;
+  background: var(--red);
+  transition: width 0.25s ease;
+}
+
+.menu a:hover::after {
+  width: 10px;
+}
+
+/* Dekoratif kırmızı çizgi (logo tümseği) */
+.line {
+  position: relative;
+  width: 100%;
+  height: 48px;
+  margin-top: 10px;
+}
+
+.line svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Alt şerit */
+.bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 13px;
+  color: #7d8893;
+}
+
+.bottom .legal {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.bottom .legal a {
+  transition: color 0.2s;
+}
+
+.bottom .legal a:hover {
+  color: #fff;
+}
+
+.bottom .legal .sep {
+  width: 1px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.bottom .web {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #7d8893;
+}
+
+.bottom .web .pill {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bottom .web .pill svg {
+  width: 11px;
+  height: 11px;
+  color: var(--red);
+}
+
+/* ============ RESPONSIVE ============ */
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  .menu {
+    text-align: left;
+  }
+  .menu a {
+    justify-self: start;
+  }
+  .menu a:hover {
+    padding-right: 0;
+    padding-left: 14px;
+  }
+  .menu a::after {
+    right: auto;
+    left: 0;
+  }
+  .center {
+    grid-column: span 2;
+    align-items: flex-start;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .socials {
+    margin-top: 16px;
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 780px) {
+  .ftA {
+    padding-top: 60px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    padding-bottom: 40px;
+  }
+  .center {
+    grid-column: span 1;
+  }
+  .menu {
+    text-align: left;
+  }
+  .menu a {
+    font-size: 16px;
+  }
+  .logo .lg {
+    font-size: 32px;
+  }
+  .bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+  .ftA::before,
+  .ftA::after {
+    display: none;
+  }
+}

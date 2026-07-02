@@ -1,0 +1,448 @@
+/* ============================================================
+   LEAD FORMLARI — stil katmanı (Forms.module.css)
+   Yapı bileşenlerden ayrık tutuldu: görsel pas geldiğinde
+   sadece bu dosya değişir, form akışına dokunulmaz.
+   Tüm değerler globals.css design token'larından gelir.
+   ============================================================ */
+
+/* ---------- Sayfa iskeleti ---------- */
+.pageHead {
+  padding: 84px 0 12px;
+}
+
+.pageHead p {
+  margin-top: 16px;
+  max-width: 620px;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+.formSection {
+  padding: 36px 0 110px;
+}
+
+/* ---------- Form kartı ---------- */
+.card {
+  max-width: 780px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: 34px 38px 40px;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 24px 20px 30px;
+  }
+}
+
+/* ---------- Adım göstergesi ---------- */
+.steps {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  margin: 0 0 30px;
+  padding: 0;
+}
+
+.stepItem {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stepItem::before {
+  content: "";
+  display: block;
+  height: 4px;
+  border-radius: 99px;
+  background: var(--softer);
+}
+
+.stepItemActive {
+  color: var(--red);
+}
+
+.stepItemActive::before {
+  background: var(--red);
+}
+
+.stepItemDone {
+  color: var(--ink);
+}
+
+.stepItemDone::before {
+  background: var(--ink);
+}
+
+/* ---------- Adım başlığı ---------- */
+.stepTitle {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0 0 6px;
+  outline: none; /* programatik focus için görünür halka istemiyoruz */
+}
+
+.stepHint {
+  color: var(--muted);
+  font-size: 14px;
+  margin: 0 0 24px;
+}
+
+/* ---------- Alanlar ---------- */
+.field {
+  margin-bottom: 20px;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 560px) {
+  .grid2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.label {
+  display: block;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.optional {
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.input,
+.textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--soft);
+  padding: 13px 16px;
+  font-size: 15px;
+  font-family: inherit;
+  color: var(--ink);
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 130px;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--red);
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(226, 6, 19, 0.12);
+}
+
+.inputError {
+  border-color: var(--red);
+}
+
+.error {
+  margin: 7px 0 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--red);
+}
+
+.hint {
+  margin: 7px 0 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* ---------- Model seçimi (radio kartlar) ---------- */
+.modelGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  border: 0;
+  margin: 0 0 20px;
+  padding: 0;
+}
+
+@media (max-width: 560px) {
+  .modelGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.modelLegend {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.modelOption {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  background: var(--white);
+  padding: 14px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.modelOption:hover {
+  border-color: var(--muted);
+}
+
+.modelOptionChecked {
+  border-color: var(--red);
+  background: rgba(226, 6, 19, 0.05);
+}
+
+.modelOption input {
+  accent-color: var(--red);
+  width: 18px;
+  height: 18px;
+  flex: none;
+}
+
+/* ---------- Honeypot: görünmez ama display:none değil ---------- */
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Butonlar ---------- */
+.actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  margin-top: 30px;
+}
+
+.btnPrimary,
+.btnGhost,
+.btnWhatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border-radius: 99px;
+  padding: 14px 30px;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
+  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+.btnPrimary {
+  background: var(--red);
+  color: var(--white);
+  box-shadow: var(--shadow-red);
+}
+
+.btnPrimary:hover {
+  background: var(--red-dark);
+}
+
+.btnPrimary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.btnGhost {
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: var(--white);
+}
+
+.btnGhost:hover {
+  border-color: var(--muted);
+}
+
+.btnWhatsapp {
+  background: var(--whatsapp);
+  color: var(--white);
+}
+
+.btnWhatsapp:hover {
+  filter: brightness(0.93);
+}
+
+/* ---------- Sonuç ekranları (başarı / fallback) ---------- */
+.result {
+  max-width: 780px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  background: var(--white);
+  box-shadow: var(--shadow-lg);
+  padding: 48px 40px;
+  text-align: center;
+}
+
+.resultIcon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  font-size: 28px;
+}
+
+.resultIconSuccess {
+  background: rgba(37, 211, 102, 0.14);
+  color: var(--whatsapp);
+}
+
+.resultIconWarn {
+  background: rgba(226, 6, 19, 0.08);
+  color: var(--red);
+}
+
+.resultTitle {
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--ink);
+  margin: 0 0 10px;
+}
+
+.resultText {
+  color: var(--text);
+  max-width: 480px;
+  margin: 0 auto 26px;
+}
+
+.resultActions {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ---------- İletişim sayfası ---------- */
+.contactGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: 32px;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .contactGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.infoCard {
+  background: var(--ink);
+  color: rgba(255, 255, 255, 0.82);
+  border-radius: var(--radius-md);
+  padding: 32px 30px;
+}
+
+.infoCard h2 {
+  color: var(--white);
+  font-size: 22px;
+  margin: 0 0 20px;
+}
+
+.infoList {
+  list-style: none;
+  margin: 0 0 24px;
+  padding: 0;
+  display: grid;
+  gap: 16px;
+}
+
+.infoList strong {
+  display: block;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 3px;
+}
+
+.infoList a {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.infoList a:hover {
+  color: var(--red-light);
+}
+
+.mapPlaceholder {
+  margin-top: 28px;
+  border-radius: var(--radius-md);
+  border: 1px dashed var(--line);
+  background: var(--soft);
+  min-height: 260px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- TeklifCTA bandı ---------- */
+.ctaBand {
+  background: var(--ink);
+  border-radius: var(--radius-md);
+  padding: 40px 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.ctaBandTitle {
+  color: var(--white);
+  font-size: clamp(22px, 2.6vw, 30px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0 0 6px;
+}
+
+.ctaBandText {
+  color: rgba(255, 255, 255, 0.72);
+  margin: 0;
+  max-width: 520px;
+}
+
+.ctaBandActions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
