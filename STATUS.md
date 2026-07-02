@@ -5,6 +5,21 @@
 **Faz:** Faz 1-2 karışık ilerleme (tasarım portları beklemede — karar aşaması; tasarımsız her şey inşa edildi)
 **Build:** ✅ `npm run build` hatasız — 44 statik sayfa + dinamik route'lar + middleware, ESLint temiz
 
+---
+
+## ✅ 2 Tem Gece — Supabase + GitHub kuruldu (BLOKÖR ÇÖZÜLDÜ)
+
+- **GitHub:** repo `github.com/odcreative/rentayapi-web` (public), `main` push edildi (2 commit, 109 dosya). `origin` bağlı. `.env*` gitignore'da → secret sızmadı.
+- **Supabase cloud:** proje **`renta-yapi`** — ref `cfoinrwemxjzydmhdpvt`, bölge **eu-central-1 (Frankfurt)**, org `odcreative`. (Önceki 2 çöp proje — Tokyo + Vercel/US — silindi; free plan 2-proje limiti.)
+- **Migration'lar:** `0001` + `0002` + `0003` `npx supabase db push` ile uygulandı (local==remote, 3/3). `supabase/config.toml` linkli.
+- **`.env.local`:** URL + anon + service_role + `NEXT_PUBLIC_SITE_URL=localhost:3000` yazıldı (gitignore'da). **DB şifresi:** `1Password/Bitwarden`'a kaydet — CLI'da `SUPABASE_DB_PASSWORD`.
+- **Uçtan uca test:** `/` 200, `/etkinlik-cadiri` 200 + DB içeriği render (fallback değil), `/blog` 200, `/admin` 307 (auth redirect ✓). RLS doğru: public tablolar okunuyor, `leads` anon SELECT edemiyor.
+- **Seed doğrulandı:** tent_models 5, posts 31, site_settings 2, leads 0.
+
+**Kalan manuel adımlar:** (1) Auth'tan **admin kullanıcısı** oluştur (dashboard → Authentication → Add user) → `/admin` login testi; (2) **Vercel** bağla (repo import + prod env: `NEXT_PUBLIC_SITE_URL=https://www.rentayapi.com` + Supabase env'leri); (3) prod'a geçişte `robots` kapısı açılır.
+
+---
+
 ## 2 Tem Akşam Sprint'i (4 paralel track)
 
 1. **Admin panel MVP** ✅ — `/admin`: Supabase Auth login + middleware koruması, lead inbox (durum pipeline: Yeni/Arandı/Teklif Verildi/Kapandı, filtre, satır içi durum değiştirme), 6 tablo generic CRUD (`src/lib/admin/resources.ts` deklaratif config — yeni tablo = bir kayıt), site ayarları formu, dashboard sayaçları. Env yokken kurulum talimatlı ekran. Kök layout'a dokunulmadı (admin kendi fullscreen overlay'i; ileride route group'a taşınabilir).
