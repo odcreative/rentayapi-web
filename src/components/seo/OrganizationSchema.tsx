@@ -1,4 +1,4 @@
-import { SITE_SETTINGS } from "@/lib/site-settings";
+import { getSiteSettings } from "@/lib/queries";
 import { PROD_ORIGIN } from "@/lib/seo/site";
 
 /**
@@ -19,15 +19,17 @@ import { PROD_ORIGIN } from "@/lib/seo/site";
  *   render edilmesi yeterlidir (sayfa bazlı Product/FAQ/Article şemaları
  *   Faz 4'te ayrı bileşenler olarak gelecek).
  *
- * Veri kaynağı: src/lib/site-settings.ts statik fallback — Supabase
- * `site_settings` tablosu devreye girince otomatik güncel kalması için
- * oradaki tek kaynaktan besleniyor, burada değer TEKRAR EDİLMEDİ.
+ * Veri kaynağı: getSiteSettings() — `site_settings` tablosundan DB-first,
+ * env/DB yoksa src/lib/site-settings.ts statik fallback. Cookie'siz anon
+ * client kullanıldığı için layout'u dynamic rendering'e zorlamaz.
  *
  * URL'lerde bilinçli olarak PROD_ORIGIN (www.rentayapi.com) kullanılır:
  * schema'daki kimlik URL'leri preview ortamında bile canonical domain'i
  * göstermelidir.
  */
-export default function OrganizationSchema() {
+export default async function OrganizationSchema() {
+  const settings = await getSiteSettings();
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -39,8 +41,8 @@ export default function OrganizationSchema() {
         url: PROD_ORIGIN,
         logo: `${PROD_ORIGIN}/images/renta-logo.svg`,
         foundingDate: "2010",
-        email: SITE_SETTINGS.email,
-        telephone: SITE_SETTINGS.phone,
+        email: settings.email,
+        telephone: settings.phone,
         address: {
           "@type": "PostalAddress",
           streetAddress:
@@ -52,8 +54,8 @@ export default function OrganizationSchema() {
         contactPoint: {
           "@type": "ContactPoint",
           contactType: "customer service",
-          telephone: SITE_SETTINGS.phone,
-          email: SITE_SETTINGS.email,
+          telephone: settings.phone,
+          email: settings.email,
           availableLanguage: ["Turkish"],
         },
       },
@@ -64,8 +66,8 @@ export default function OrganizationSchema() {
         parentOrganization: { "@id": `${PROD_ORIGIN}/#organization` },
         url: PROD_ORIGIN,
         image: `${PROD_ORIGIN}/images/hero-1.webp`,
-        telephone: SITE_SETTINGS.phone,
-        email: SITE_SETTINGS.email,
+        telephone: settings.phone,
+        email: settings.email,
         priceRange: "₺₺",
         address: {
           "@type": "PostalAddress",

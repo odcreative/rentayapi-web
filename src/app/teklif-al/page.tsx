@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import TeklifForm from "@/components/forms/TeklifForm";
+import { getSiteSettings } from "@/lib/queries";
 import styles from "@/components/forms/Forms.module.css";
 
 export const metadata: Metadata = {
@@ -13,7 +14,9 @@ export const metadata: Metadata = {
  * Gönderim `leads` tablosuna düşer (source_page + first-touch UTM ile);
  * admin panel lead inbox'ında durum takibi yapılır (yeni/arandı/teklif/kapandı).
  */
-export default function TeklifAlPage() {
+export default async function TeklifAlPage() {
+  const settings = await getSiteSettings();
+
   return (
     <>
       <section className={styles.pageHead}>
@@ -29,7 +32,7 @@ export default function TeklifAlPage() {
 
       <section className={styles.formSection}>
         <div className="wrap">
-          <TeklifForm />
+          <TeklifForm contact={settings} />
         </div>
       </section>
     </>

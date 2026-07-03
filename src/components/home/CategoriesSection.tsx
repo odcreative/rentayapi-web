@@ -35,7 +35,7 @@ const CATEGORIES: Category[] = [
       { strong: "10–40 m", rest: " açıklık" },
       { strong: "10 yıl", rest: " garanti" },
     ],
-    href: "/cadir-modelleri/endustriyel",
+    href: "/cadir-modelleri", // hub fallback (Karar #2) — kök model sayfası yok, quick-win açılınca güncellenecek
     image: "/images/cat-endustriyel.webp",
   },
   {
@@ -47,7 +47,7 @@ const CATEGORIES: Category[] = [
       { strong: "5–25 m", rest: " açıklık" },
       { strong: "72 saat", rest: " kurulum" },
     ],
-    href: "/cadir-modelleri/etkinlik",
+    href: "/etkinlik-cadiri", // kök model sayfası (Karar #2)
     image: "/images/cat-etkinlik.webp",
   },
   {
@@ -59,7 +59,7 @@ const CATEGORIES: Category[] = [
       { strong: "3×3 – 6×6 m" },
       { strong: "Hızlı", rest: " kurulum" },
     ],
-    href: "/cadir-modelleri/pagoda",
+    href: "/pagoda-cadir", // kök model sayfası (Karar #2)
     image: "/images/cat-pagoda.webp",
   },
   {
@@ -71,7 +71,7 @@ const CATEGORIES: Category[] = [
       { strong: "Sınırsız", rest: " form" },
       { strong: "R&D", rest: " destekli" },
     ],
-    href: "/cadir-modelleri/ozel",
+    href: "/cadir-modelleri", // hub fallback (Karar #2)
     image: "/images/cat-ozel.webp",
   },
   {
@@ -80,7 +80,7 @@ const CATEGORIES: Category[] = [
     title: "Depo Çadırları",
     desc: "Sezonluk stok, lojistik üs ve yedek depolama için izolasyonlu ağır hizmet yapıları.",
     meta: [{ strong: "500–5.000 m²" }, { strong: "İzolasyonlu" }],
-    href: "/cadir-modelleri/depo",
+    href: "/depo-cadiri", // kök model sayfası (Karar #2)
     image: "/images/cat-depo.webp",
   },
   {
@@ -89,7 +89,7 @@ const CATEGORIES: Category[] = [
     title: "Fuar & Stand Çadırları",
     desc: "Marka lansmanları, fuar standları ve roadshow için şeffaf cepheli özel çözümler.",
     meta: [{ strong: "Cam cephe" }, { strong: "Markalama" }],
-    href: "/cadir-modelleri/fuar",
+    href: "/cadir-modelleri", // hub fallback (Karar #2) — fuar/stand quick-win sayfası S2-3'te brieflendi
     image: "/images/cat-fuar.webp",
   },
   {
@@ -101,7 +101,7 @@ const CATEGORIES: Category[] = [
       { strong: "20–50 m", rest: " açıklık" },
       { strong: "Tüm sezon" },
     ],
-    href: "/cadir-modelleri/spor",
+    href: "/cadir-modelleri", // hub fallback (Karar #2)
     image: "/images/cat-spor.webp",
   },
   {
@@ -110,7 +110,7 @@ const CATEGORIES: Category[] = [
     title: "VIP Protokol Çadırları",
     desc: "Davet, protokol ve özel etkinlikler için lüks finiş ve klima entegrasyonlu çözümler.",
     meta: [{ strong: "Klimalı" }, { strong: "Lüks finiş" }],
-    href: "/cadir-modelleri/vip",
+    href: "/cadir-modelleri", // hub fallback (Karar #2)
     image: "/images/cat-vip.webp",
   },
 ];

@@ -1,0 +1,488 @@
+/* ============================================================
+   REFERANSLAR — YATAY AKORDEON (v3)
+   (port: 01_TASARIM/index-v2.html — .proj-band CSS satır 383-524,
+    markup 1072-1191; responsive 660-663 / 677-684 / 724-740 — birebir)
+   ============================================================ */
+
+.projBand {
+  background: var(--ink);
+  color: #fff;
+  padding: 110px 0 110px;
+  overflow: hidden;
+}
+
+/* --- üst başlık satırı: sol başlık bloğu + sağ dev outlined sayı --- */
+.projHead {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 60px;
+  align-items: flex-start;
+  margin-bottom: 60px;
+}
+
+.sec {
+  max-width: 680px;
+}
+
+/* Kaynak: .proj-head .section-head h2 */
+.sec h2 {
+  color: #fff;
+  font-size: clamp(36px, 4.6vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  margin-bottom: 20px;
+}
+
+/* Kaynak: .lead + .proj-band .lead{color:#b9bcc1}
+   + .section-head p{margin-top:12px} */
+.lead {
+  font-size: 18px;
+  line-height: 1.65;
+  color: #b9bcc1;
+  margin-top: 12px;
+}
+
+.allLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--red);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-top: 26px;
+  border-bottom: 1px solid rgba(226, 6, 19, 0.4);
+  padding-bottom: 8px;
+  transition: gap 0.25s ease, border-color 0.2s;
+}
+
+.allLink:hover {
+  gap: 18px;
+  border-color: var(--red);
+}
+
+.arrIc {
+  width: 18px;
+  height: 18px;
+  display: inline-grid;
+  place-items: center;
+}
+
+.allLink svg {
+  width: 18px;
+  height: 18px;
+  transform: rotate(-45deg);
+}
+
+/* Dev outlined istatistik — sağ */
+.bigstat {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  flex-shrink: 0;
+}
+
+.bigLabel {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  line-height: 1.5;
+}
+
+.bigNum {
+  font-weight: 800;
+  font-size: clamp(90px, 11vw, 170px);
+  line-height: 0.85;
+  letter-spacing: -0.06em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--red);
+  display: flex;
+  align-items: flex-start;
+}
+
+.bigNum sup {
+  font-size: 0.55em;
+  line-height: 1;
+  margin-top: 0.15em;
+}
+
+/* --- yatay akordeon --- */
+.acc {
+  display: flex;
+  gap: 6px;
+  height: 560px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: var(--ink-2); /* kaynak #15171a ≡ --ink-2 */
+}
+
+.panel {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 80px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex-grow 0.7s cubic-bezier(0.7, 0, 0.25, 1);
+  background: var(--ink);
+  border-right: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.panel:last-child {
+  border-right: 0;
+}
+
+.panel.active {
+  flex-grow: 6;
+}
+
+/* Arka plan görseli (yalnızca aktifken belirir) */
+.img {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 0.6s ease 0.1s, transform 1.2s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.panel.active .img {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.img img {
+  object-fit: cover;
+}
+
+/* Aktif panelde okunabilirlik için karartma katmanı */
+.veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 15, 18, 0.15) 0%,
+    rgba(14, 15, 18, 0.25) 40%,
+    rgba(14, 15, 18, 0.92) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.panel.active .veil {
+  opacity: 1;
+}
+
+/* Büyük outlined numara — sol üst */
+.num {
+  position: absolute;
+  top: 38px;
+  left: 28px;
+  z-index: 3;
+  font-weight: 800;
+  font-size: 78px;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--red);
+  transition: transform 0.5s ease, color 0.4s ease, -webkit-text-stroke-color 0.4s ease;
+}
+
+.panel.active .num {
+  color: #fff;
+  -webkit-text-stroke-color: #fff;
+}
+
+/* Kapalı panellerde ortalanmış aşağı ok */
+.down {
+  position: absolute;
+  left: 50%;
+  top: 60%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: var(--red);
+  border: 1.5px solid rgba(226, 6, 19, 0.45);
+  background: rgba(226, 6, 19, 0.06);
+  transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+
+.down svg {
+  width: 18px;
+  height: 18px;
+}
+
+.panel.active .down {
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.7);
+  pointer-events: none;
+}
+
+/* Kapalı durumda dikey etiket (aşağıdan yukarı okunur) */
+.vLabel {
+  position: absolute;
+  left: 50%;
+  bottom: 42px;
+  z-index: 3;
+  transform: translateX(-50%) rotate(-90deg);
+  transform-origin: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  white-space: nowrap;
+  transition: opacity 0.35s ease;
+}
+
+.panel.active .vLabel {
+  opacity: 0;
+}
+
+/* Genişleyen bilgi bloğu — aktif panelde */
+.info {
+  position: absolute;
+  left: 36px;
+  right: 36px;
+  bottom: 40px;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease 0.25s, transform 0.55s cubic-bezier(0.2, 0.6, 0.2, 1) 0.25s;
+  max-width: 560px;
+}
+
+.panel.active .info {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cat {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--red-light);
+  margin-bottom: 14px;
+  padding: 6px 12px;
+  border: 1px solid rgba(255, 90, 100, 0.4);
+  border-radius: 99px;
+  background: rgba(226, 6, 19, 0.08);
+}
+
+.info h3 {
+  color: #fff;
+  font-size: clamp(24px, 2.4vw, 34px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+  font-weight: 800;
+}
+
+.info p {
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 22px;
+  max-width: 480px;
+}
+
+/* Panel meta şeridi — CTA üstündeki küçük istatistikler */
+.accMeta {
+  display: flex;
+  gap: 28px;
+  margin-bottom: 22px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.m {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.m b {
+  display: block;
+  color: #fff;
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  margin-bottom: 2px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--red);
+  color: #fff;
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 16px 24px;
+  border-radius: 0;
+  transition: background 0.2s ease, gap 0.25s ease;
+}
+
+.cta:hover {
+  background: var(--red-dark);
+  gap: 20px;
+}
+
+.cta svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* --- responsive (kaynak breakpoint'leri) --- */
+@media (max-width: 1200px) {
+  .acc {
+    height: 500px;
+  }
+
+  .num {
+    font-size: 64px;
+    top: 30px;
+    left: 22px;
+  }
+
+  .projHead {
+    gap: 40px;
+  }
+}
+
+@media (max-width: 980px) {
+  .projHead {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .bigstat {
+    order: -1;
+  }
+
+  .acc {
+    height: 460px;
+  }
+
+  .info {
+    left: 24px;
+    right: 24px;
+    bottom: 30px;
+  }
+
+  .info h3 {
+    font-size: 24px;
+  }
+
+  .info p {
+    font-size: 14px;
+  }
+
+  .accMeta {
+    gap: 18px;
+    margin-bottom: 18px;
+    padding-bottom: 14px;
+  }
+
+  .m b {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 560px) {
+  /* Akordeon mobilde dikey yığılır */
+  .acc {
+    flex-direction: column;
+    height: auto;
+    gap: 8px;
+    background: transparent;
+    border-radius: 0;
+  }
+
+  .panel {
+    flex: 1 1 auto;
+    min-height: 340px;
+    border-radius: var(--radius-md);
+    border-right: 0;
+  }
+
+  .panel.active {
+    flex-grow: 1;
+    min-height: 440px;
+  }
+
+  .img {
+    opacity: 0.45;
+    transform: scale(1);
+  }
+
+  .panel.active .img {
+    opacity: 1;
+  }
+
+  .veil {
+    opacity: 1;
+  }
+
+  .num {
+    font-size: 54px;
+    top: 20px;
+    left: 20px;
+    color: #fff;
+    -webkit-text-stroke-color: #fff;
+  }
+
+  .vLabel {
+    display: none;
+  }
+
+  .down {
+    display: none;
+  }
+
+  .info {
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    bottom: 24px;
+    opacity: 1;
+    transform: none;
+  }
+
+  .accMeta {
+    display: none;
+  }
+
+  .panel.active .accMeta {
+    display: flex;
+  }
+
+  .info h3 {
+    font-size: 22px;
+  }
+
+  .info p {
+    display: none;
+  }
+
+  .panel.active .info p {
+    display: block;
+    font-size: 14px;
+  }
+
+  .bigNum {
+    font-size: 90px;
+  }
+}

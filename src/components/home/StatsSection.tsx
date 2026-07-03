@@ -117,7 +117,15 @@ function StatNum({ value, plus }: { value: number; plus?: boolean }) {
   );
 }
 
-export default function StatsSection() {
+type StatsSectionProps = {
+  /** Tanıtım filmi URL'i — server'dan DB-first gelir (site_settings);
+   *  prop verilmezse statik fallback kullanılır. */
+  promoVideoUrl?: string;
+};
+
+export default function StatsSection({
+  promoVideoUrl = SITE_SETTINGS.promo_video_url,
+}: StatsSectionProps) {
   const [videoOpen, setVideoOpen] = useState(false);
 
   return (
@@ -192,7 +200,7 @@ export default function StatsSection() {
       <VideoModal
         open={videoOpen}
         onClose={() => setVideoOpen(false)}
-        videoUrl={SITE_SETTINGS.promo_video_url}
+        videoUrl={promoVideoUrl}
       />
     </section>
   );

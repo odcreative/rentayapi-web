@@ -135,10 +135,10 @@ app/
 
 ## Sonraki Adımlar
 
-1. **Supabase cloud projesi (BLOKÖR — insan aksiyonu)** — proje aç, `0001` + `0002` (+`0003` gelirse) migration'ları uygula, `.env.local` doldur, Auth'tan admin kullanıcısı oluştur, admin panel + teklif formu uçtan uca test
+1. ~~**Supabase cloud projesi (BLOKÖR)**~~ ✅ ÇÖZÜLDÜ (2 Tem gece — yukarıdaki bölüm). Kalan: Auth admin kullanıcısı (Sprint 2 S2-2'de scriptle oluşturuluyor) + Vercel bağlama (Olcay)
 2. **Vercel bağlama** — repo push + Vercel import; prod env'e `NEXT_PUBLIC_SITE_URL=https://www.rentayapi.com` MUTLAKA (yoksa robots full-disallow kalır — bilinçli emniyet); domain geçişi Faz 5'te
 3. **TASARIM KARARI BEKLENİYOR:** anasayfa section portları (index-v2.html: kategori carousel, about+sayaç, referans akordeonu, why-us, süreç, logolar, testimonials, blog, CTA), hakkimizda/sss iç sayfa portları, model şablonu görsel katmanı, teklif formu + blog/model sayfalarının görsel pası
-4. **13 eksik canlı blog yazısı** — canlı siteden çekiliyor (devam eden agent görevi); bitmezse launch öncesi tekrar dene ya da taze DB dump'ı al
+4. ~~**13 eksik canlı blog yazısı**~~ ✅ KAPANDI (3 Tem, renta-content S2-4): 12'si `0003_live_content_seed.sql`'de zaten vardı, 13.'sü yazı değil (301 → `cadir-fiyatlari-rehberi-2025`). Canlı 30/30 yazı seed'lerde doğrulandı.
 5. **Görsel migrasyonu** — içerik görselleri hâlâ `www.rentayapi.com/wp-content/uploads`'a işaret ediyor → Supabase Storage/R2'ye taşınacak
 6. **5 quick-win yeni model sayfası** (fuar/stand/şantiye/kubbeli/afet) — Faz 2; katalog PDF entegrasyonu
 7. **Tanıtım filmi** — dosya Renta/ajans arşivinden temin edilince `site_settings.promo_video_url`'e eklenecek (modal hazır)

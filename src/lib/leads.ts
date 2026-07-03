@@ -15,7 +15,7 @@
  */
 
 import { createClient } from "@/lib/supabase/server";
-import { SITE_SETTINGS } from "@/lib/site-settings";
+import { getSiteSettings } from "@/lib/queries";
 import {
   buildWhatsAppUrl,
   getModelLabel,
@@ -85,19 +85,23 @@ function isSupabaseConfigured(): boolean {
   );
 }
 
-function unavailableResult(input?: LeadFormInput): SubmitLeadResult {
+async function unavailableResult(input?: LeadFormInput): Promise<SubmitLeadResult> {
   const parts = ["Merhaba, web sitenizden teklif talebi göndermek istedim."];
   if (input?.model_slug) parts.push(`Model: ${getModelLabel(input.model_slug)}.`);
   if (input?.area_m2?.trim()) parts.push(`Tahmini alan: ${input.area_m2.trim()} m².`);
   if (input?.name?.trim()) parts.push(`Ad: ${input.name.trim()}.`);
+
+  // DB-first iletişim bilgisi; env/DB yoksa getSiteSettings kendi içinde
+  // statik fallback'e düşer — burada ek guard gerekmez.
+  const settings = await getSiteSettings();
 
   return {
     ok: false,
     code: "unavailable",
     message:
       "Formu şu an ulaştıramadık. Dilerseniz WhatsApp üzerinden veya telefonla hemen ulaşabilirsiniz.",
-    whatsappUrl: buildWhatsAppUrl(SITE_SETTINGS.whatsapp, parts.join(" ")),
-    phone: SITE_SETTINGS.phone,
+    whatsappUrl: buildWhatsAppUrl(settings.whatsapp, parts.join(" ")),
+    phone: settings.phone,
   };
 }
 
@@ -157,7 +161,7 @@ export async function submitLead(input: LeadFormInput): Promise<SubmitLeadResult
 
   // --- 3) Supabase yoksa zarif fallback -------------------------------
   if (!isSupabaseConfigured()) {
-    return unavailableResult(input);
+    return await unavailableResult(input);
   }
 
   // --- 4) INSERT -------------------------------------------------------
@@ -196,12 +200,12 @@ export async function submitLead(input: LeadFormInput): Promise<SubmitLeadResult
 
     if (error) {
       console.error("[leads] INSERT hatası:", error.message);
-      return unavailableResult(input);
+      return await unavailableResult(input);
     }
 
     return { ok: true };
   } catch (err) {
     console.error("[leads] Beklenmeyen hata:", err);
-    return unavailableResult(input);
+    return await unavailableResult(input);
   }
 }

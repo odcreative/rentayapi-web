@@ -145,11 +145,11 @@ export default function Footer() {
         <div className={styles.bottom}>
           <span>© {new Date().getFullYear()} Renta Yapı. Tüm hakları saklıdır.</span>
           <div className={styles.legal}>
-            <a href="/kvkk">KVKK</a>
+            <Link href="/kvkk">KVKK</Link>
             <span className={styles.sep} />
-            <a href="/cerez-politikasi">Çerez Politikası</a>
+            <Link href="/cerez-politikasi">Çerez Politikası</Link>
             <span className={styles.sep} />
-            <a href="/gizlilik-politikasi">Gizlilik</a>
+            <Link href="/gizlilik-politikasi">Gizlilik</Link>
           </div>
           <div className={styles.web}>
             <span className={styles.pill}>

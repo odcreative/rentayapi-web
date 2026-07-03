@@ -59,7 +59,15 @@ const SLIDES: Slide[] = [
   },
 ];
 
-export default function Hero() {
+type HeroProps = {
+  /** Tanıtım filmi URL'i — server'dan DB-first gelir (site_settings);
+   *  prop verilmezse statik fallback kullanılır. */
+  promoVideoUrl?: string;
+};
+
+export default function Hero({
+  promoVideoUrl = SITE_SETTINGS.promo_video_url,
+}: HeroProps) {
   const [index, setIndex] = useState(0);
   // Manuel gezinmede progress animasyonunu sıfırlamak için key
   const [cycle, setCycle] = useState(0);
@@ -153,7 +161,7 @@ export default function Hero() {
       <VideoModal
         open={videoOpen}
         onClose={() => setVideoOpen(false)}
-        videoUrl={SITE_SETTINGS.promo_video_url}
+        videoUrl={promoVideoUrl}
       />
     </section>
   );

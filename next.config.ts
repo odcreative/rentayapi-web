@@ -20,10 +20,11 @@ import path from "path";
  */
 const legacyRedirects: Array<{ source: string; destination: string }> = [
   // --- Yapısal / hub birleştirmeleri ---
-  { source: "/slider-test", destination: "/" }, // test sayfası — PRODUCT_PLAN §6: silinir
+  // NOT (Karar #4, Sprint 2): /slider-test ve /locations.kml artık burada
+  // DEĞİL — 410 Gone dönüyorlar (src/middleware.ts). Config redirects
+  // middleware'den ÖNCE çalıştığı için buraya tekrar eklenmeleri 410'u bozar.
   { source: "/services", destination: "/cadir-modelleri" }, // canlıda da 301'di (2100+ hit)
   { source: "/projeler", destination: "/projelerimiz" }, // hub birleşti; /projeler/:slug korunuyor
-  { source: "/locations.kml", destination: "/sehirler" }, // WP local-sitemap kalıntısı
 
   // --- Canlı WP Redirection eklentisinden devralınan 301'ler ---
   { source: "/depo-cadirlari", destination: "/depo-cadiri" },

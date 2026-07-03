@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import ContactForm from "@/components/forms/ContactForm";
-import { SITE_SETTINGS } from "@/lib/site-settings";
+import { getSiteSettings } from "@/lib/queries";
 import { buildWhatsAppUrl, digitsOnly } from "@/components/forms/lead-utils";
 import styles from "@/components/forms/Forms.module.css";
 
@@ -12,10 +12,13 @@ export const metadata: Metadata = {
 
 /**
  * İletişim sayfası — kısa form (aynı `submitLead` action'ı, model=null)
- * + statik iletişim bilgileri (site_settings fallback) + harita placeholder.
+ * + iletişim bilgileri (site_settings DB-first, statik fallback yedekli)
+ * + harita placeholder.
  * Port kaynağı 01_TASARIM/iletisim.html — görsel pas o portta gelecek.
  */
-export default function IletisimPage() {
+export default async function IletisimPage() {
+  const settings = await getSiteSettings();
+
   return (
     <>
       <section className={styles.pageHead}>
@@ -32,41 +35,41 @@ export default function IletisimPage() {
       <section className={styles.formSection}>
         <div className="wrap">
           <div className={styles.contactGrid}>
-            {/* Sol: iletişim bilgileri (site_settings statik fallback) */}
+            {/* Sol: iletişim bilgileri (site_settings DB-first + fallback) */}
             <div>
               <div className={styles.infoCard}>
                 <h2>İletişim Bilgileri</h2>
                 <ul className={styles.infoList}>
                   <li>
                     <strong>Telefon</strong>
-                    <a href={`tel:+${digitsOnly(SITE_SETTINGS.phone)}`}>
-                      {SITE_SETTINGS.phone}
+                    <a href={`tel:+${digitsOnly(settings.phone)}`}>
+                      {settings.phone}
                     </a>
                   </li>
                   <li>
                     <strong>WhatsApp</strong>
                     <a
-                      href={buildWhatsAppUrl(SITE_SETTINGS.whatsapp)}
+                      href={buildWhatsAppUrl(settings.whatsapp)}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {SITE_SETTINGS.whatsapp}
+                      {settings.whatsapp}
                     </a>
                   </li>
                   <li>
                     <strong>E-posta</strong>
-                    <a href={`mailto:${SITE_SETTINGS.email}`}>
-                      {SITE_SETTINGS.email}
+                    <a href={`mailto:${settings.email}`}>
+                      {settings.email}
                     </a>
                   </li>
                   <li>
                     <strong>Adres</strong>
-                    {SITE_SETTINGS.address}
+                    {settings.address}
                   </li>
                 </ul>
                 <a
                   href={buildWhatsAppUrl(
-                    SITE_SETTINGS.whatsapp,
+                    settings.whatsapp,
                     "Merhaba, çadır kiralama hakkında bilgi almak istiyorum."
                   )}
                   className={styles.btnWhatsapp}
@@ -84,7 +87,7 @@ export default function IletisimPage() {
             </div>
 
             {/* Sağ: kısa iletişim formu → leads (model=null) */}
-            <ContactForm />
+            <ContactForm contact={settings} />
           </div>
         </div>
       </section>

@@ -14,13 +14,21 @@ import {
   getCurrentPage,
 } from "@/lib/attribution";
 import { submitLead, type SubmitLeadResult } from "@/lib/leads";
-import { SITE_SETTINGS } from "@/lib/site-settings";
+import { SITE_SETTINGS, type SiteContact } from "@/lib/site-settings";
 import { buildWhatsAppUrl, normalizeTrPhone } from "./lead-utils";
 import styles from "./Forms.module.css";
 
 type Status = "form" | "submitting" | "success" | "unavailable";
 
-export default function ContactForm() {
+type ContactFormProps = {
+  /** Telefon + WhatsApp — server'dan DB-first gelir (site_settings);
+   *  prop verilmezse statik fallback kullanılır. */
+  contact?: SiteContact;
+};
+
+export default function ContactForm({
+  contact = SITE_SETTINGS,
+}: ContactFormProps) {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
@@ -83,8 +91,8 @@ export default function ContactForm() {
         code: "unavailable",
         message:
           "Formu şu an ulaştıramadık. Dilerseniz WhatsApp üzerinden veya telefonla hemen ulaşabilirsiniz.",
-        whatsappUrl: buildWhatsAppUrl(SITE_SETTINGS.whatsapp),
-        phone: SITE_SETTINGS.phone,
+        whatsappUrl: buildWhatsAppUrl(contact.whatsapp),
+        phone: contact.phone,
       };
     }
 
@@ -117,7 +125,7 @@ export default function ContactForm() {
         <div className={styles.resultActions}>
           <a
             className={styles.btnWhatsapp}
-            href={buildWhatsAppUrl(SITE_SETTINGS.whatsapp)}
+            href={buildWhatsAppUrl(contact.whatsapp)}
             target="_blank"
             rel="noopener noreferrer"
           >

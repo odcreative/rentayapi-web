@@ -1,13 +1,14 @@
 /**
  * TeklifCTA — sayfa içlerine gömülebilir mini teklif bandı.
- * Server component; state yok. Her sayfayı teklif hunisine bağlamak için
- * (PRODUCT_PLAN ürün ilkesi 1). Henüz hiçbir sayfaya eklenmedi —
- * kullanım: <section className="wrap"><TeklifCTA /></section> veya wrap'i
- * kendi içinde ister misiniz diye `wrapped` prop'u ile.
+ * Async server component; state yok. WhatsApp numarası site_settings'ten
+ * DB-first okunur (env/DB yoksa statik fallback). Her sayfayı teklif
+ * hunisine bağlamak için (PRODUCT_PLAN ürün ilkesi 1). Henüz hiçbir
+ * sayfaya eklenmedi — kullanım: <section className="wrap"><TeklifCTA />
+ * </section> veya wrap'i kendi içinde ister misiniz diye `wrapped` prop'u ile.
  */
 
 import Link from "next/link";
-import { SITE_SETTINGS } from "@/lib/site-settings";
+import { getSiteSettings } from "@/lib/queries";
 import { buildWhatsAppUrl } from "./lead-utils";
 import styles from "./Forms.module.css";
 
@@ -18,11 +19,13 @@ type TeklifCTAProps = {
   wrapped?: boolean;
 };
 
-export default function TeklifCTA({
+export default async function TeklifCTA({
   title = "Projeniz için teklif alın",
   text = "Model, metrekare ve tarihinizi paylaşın — ekibimiz en geç 24 saat içinde net bir teklifle dönsün.",
   wrapped = false,
 }: TeklifCTAProps) {
+  const settings = await getSiteSettings();
+
   const band = (
     <div className={styles.ctaBand}>
       <div>
@@ -34,7 +37,7 @@ export default function TeklifCTA({
           Teklif Al →
         </Link>
         <a
-          href={buildWhatsAppUrl(SITE_SETTINGS.whatsapp)}
+          href={buildWhatsAppUrl(settings.whatsapp)}
           className={styles.btnWhatsapp}
           target="_blank"
           rel="noopener noreferrer"
