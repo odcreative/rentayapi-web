@@ -1,0 +1,106 @@
+/* ============================================================
+   NEDEN RENTA? (WHY US) — 8 farkı gösteren koyu band
+   (port: 01_TASARIM/index-v2.html — .why-band CSS satır 527-543,
+    markup 1194-1244; responsive 675/723 — birebir)
+   ============================================================ */
+
+/* Kaynak: .why-band{background:#0E0F12;color:#fff} + global section{padding:100px 0} */
+.whyBand {
+  background: #0e0f12; /* = --ink; kaynak literal değer korundu */
+  color: #fff;
+  padding: 100px 0;
+}
+
+/* Kaynak: .section-head{max-width:760px;margin-bottom:50px}
+   (why-band'da .section-head.center DEĞİL — sola yaslı) */
+.head {
+  max-width: 760px;
+  margin-bottom: 50px;
+}
+
+/* Kaynak: .why-band h2{color:#fff} + global h2{margin-bottom:14px} */
+.head h2 {
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+/* Kaynak: .lead{font-size:18px;line-height:1.65} + .why-band .lead{color:#b9bcc1}
+   + .section-head p{margin-top:12px} */
+.lead {
+  font-size: 18px;
+  line-height: 1.65;
+  color: #b9bcc1;
+  margin-top: 12px;
+}
+
+/* Kaynak: .why-grid{grid-template-columns:repeat(4,1fr);gap:20px} */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+/* Kaynak: .why{...} */
+.why {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-md);
+  padding: 32px 28px;
+  transition: all 0.25s;
+}
+
+.why:hover {
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-4px);
+  border-color: var(--red);
+}
+
+/* Kaynak: .why .ic{...} */
+.ic {
+  width: 54px;
+  height: 54px;
+  border-radius: var(--radius-md);
+  background: rgba(226, 6, 19, 0.18);
+  color: var(--red);
+  display: grid;
+  place-items: center;
+  margin-bottom: 20px;
+}
+
+.ic svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Kaynak: .why h4{color:#fff;font-size:18px;margin-bottom:8px} */
+.why h4 {
+  color: #fff;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+/* Kaynak: .why p{color:#9ea1a6;font-size:14px;line-height:1.6} */
+.why p {
+  color: #9ea1a6;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* --- responsive (kaynak breakpoint'leri) --- */
+/* Kaynak: @media(max-width:980px){section{padding:70px 0};.why-grid{...:1fr 1fr}} */
+@media (max-width: 980px) {
+  .whyBand {
+    padding: 70px 0;
+  }
+
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Kaynak: @media(max-width:560px){.why-grid{...:1fr}} */
+@media (max-width: 560px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
