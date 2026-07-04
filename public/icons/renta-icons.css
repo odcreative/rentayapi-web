@@ -1,0 +1,33 @@
+/* RENTA YAPI — Icon helpers. Pair with app/src/app/globals.css tokens.
+   Icons are stroke = currentColor, so they inherit the surrounding text `color`.
+   Size with the --rt-icon-size var or the .is-* size classes. */
+.rt-icon{
+  width: var(--rt-icon-size, 24px);
+  height: var(--rt-icon-size, 24px);
+  display: inline-block;
+  vertical-align: middle;
+  flex: 0 0 auto;
+  color: inherit;            /* recolour by setting `color` on a parent */
+  stroke: currentColor;
+  stroke-width: 2;           /* system spec: 2px base (small/large override below) */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  fill: none;
+}
+/* size ramp — matches the 4px spacing base */
+.rt-icon.is-14{ --rt-icon-size:14px } .rt-icon.is-16{ --rt-icon-size:16px }
+.rt-icon.is-20{ --rt-icon-size:20px } .rt-icon.is-24{ --rt-icon-size:24px }
+.rt-icon.is-28{ --rt-icon-size:28px } .rt-icon.is-32{ --rt-icon-size:32px }
+.rt-icon.is-40{ --rt-icon-size:40px } .rt-icon.is-48{ --rt-icon-size:48px }
+.rt-icon.is-64{ --rt-icon-size:64px }
+/* brand colour shortcuts (require globals.css tokens) */
+.rt-icon.is-red     { color: var(--red) }
+.rt-icon.is-ink     { color: var(--ink) }
+.rt-icon.is-muted   { color: var(--muted) }
+.rt-icon.is-white   { color: var(--white) }
+.rt-icon.is-star    { color: var(--star) }
+.rt-icon.is-whatsapp{ color: var(--whatsapp) }
+.rt-icon.is-line    { color: var(--line) }
+/* optical weight tweaks for very small / very large rendering */
+.rt-icon.is-14, .rt-icon.is-16{ stroke-width: 2.25 }
+.rt-icon.is-40, .rt-icon.is-48, .rt-icon.is-64{ stroke-width: 1.75 }
